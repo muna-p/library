@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel = "stylesheet" href = "library.css">
+    <link rel = "icon" type = "image/gif" href = "book.png">
+</head>
+<body>
+    <script src = "library.js" defer></script>
+    <div class = "top-banner">
+        <p>My Library</p>
+        <img id = "book-img" src = "book.png">
+        <button id = "add-book">+ Add Book</button>
+    </div>
+    <dialog id = "main-dialog">
+        <form id = "form-container" method = "dialog">
+            <p>Add Book</p>
+            <input type = "text" id = "title" name = "title" placeholder = "Title" required>
+            <input type = "text" id = "author" name = "author" placeholder = "Author" required>
+            <input type = "number" id = "pages" name = "pages" placeholder = "Pages" min = "5" required>
+            <div class="dialog-container">
+                <label for = "read">Read?</label>
+                <input type = "checkbox" id = "read" name = "read">
+            </div>
+            <div class="dialog-container-two">
+                <button type = "submit" id = "submit-button">Add</button>
+                <button type = "button" id = "cancel-button" value="cancel" formmethod = "dialog">Cancel</button>
+            </div>
+            <div id="response"></div>
+        </form>
+    </dialog>
+    <div id = "container-books"></div>
+    
+</body>
+</html>

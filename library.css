@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap');
+
+body, html {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif, Georgia, Times, 'Times New Roman';
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.top-banner {
+    background-color: #e7e5e4;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0px 20px 0px;
+}
+
+.top-banner p {
+    font-size: 2rem;
+    margin: 0;
+}
+
+#book-img {
+    height: 70px;
+    width: auto;
+}
+
+#add-book {
+    border-radius: 10px;
+    padding: 10px 10px;
+    outline: none;
+    border: 1px solid black;
+    background-color: #fef3c7;
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#add-book:hover {
+    background-color: #fde68a;
+}
+
+#container-books {
+    min-width: 30vw;
+}
+
+#book-card {
+    display: block;
+    border: 1px solid #d6d3d1;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#book-card div:nth-child(1) {
+    font-weight: 500;
+}
+
+#book-card div:nth-child(2), #book-card div:nth-child(3) {
+    color: #a8a29e;
+}
+
+#book-card div:nth-child(4) {
+    display: inline-block;
+    padding: 0px 20px 0px 5px;
+}
+
+.remove-button {
+    float: right;
+    font-family: 'Poppins', sans-serif, Georgia, Times, 'Times New Roman';
+    font-size: 1rem;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid black;
+    background-color: #f87171;
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.remove-button:hover {
+    background-color: #ef4444;
+}
+
+#book-card div:nth-child(4), #book-card img, #book-card input, #book-card label {
+    vertical-align: middle;
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+    accent-color: #34d399;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+  
+dialog {
+    width: 300px;
+    height: 400px;
+    padding: 30px 30px 50px 30px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+input[type="text"], input[type="number"] {
+    width: 100%;
+    font-family: 'Poppins', sans-serif, Georgia, Times, 'Times New Roman';
+    font-weight: 300;
+}
+
+dialog p {
+    margin: 0;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.dialog-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+input[type="text"], input[type="number"], .dialog-container, .dialog-container-two, #response {
+    margin-top: 20px;
+}
+
+.dialog-container-two {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    min-width: 100%;
+}
+
+.dialog-container-two button {
+    font-family: 'Poppins', sans-serif, Georgia, Times, 'Times New Roman';
+    font-weight: 300;
+    font-size: 1rem;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid black;
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+    min-width: 50%;
+}
+
+#submit-button {
+    background-color: #fde68a;
+}
+
+#cancel-button {
+    background-color: #e7e5e4;
+}
+
+#response {
+    color: #ef4444;
+}
