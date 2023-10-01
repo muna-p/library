@@ -1,13 +1,12 @@
 let myLibrary = [];
 
-function Book(title,author,page,read) {
-    this.title = title
-    this.author = author
-    this.page = page
-    this.read = Boolean(read)
-
-    this.readTrue = () => {this.read = true}
-    this.readFalse = () => {this.read = false}
+class Book {
+    constructor(title,author,page,read) {
+        this.title = title;
+        this.author = author;
+        this.page = page;
+        this.read = Boolean(read);
+    }
 }
 
 const bookContainer = document.getElementById('container-books');
@@ -20,63 +19,56 @@ const cancelBtn = document.getElementById("cancel-button");
 const pagesRead = document.getElementById("pages-read");
 const form = document.getElementById('form-container');
 
-function displayBook(arr) {
-    bookContainer.replaceChildren();
+Book.prototype.displayBook = function () {
+    const bookCard = document.createElement('div');
+    bookCard.id = "book-card";
+    bookContainer.appendChild(bookCard);
 
-    for (let book in arr) {
-        let bookKeys = Object.keys(arr[book]);
-        const bookCard = document.createElement('div');
-        bookCard.id = "book-card";
-        bookContainer.appendChild(bookCard); 
-        const checkBx = document.createElement('input');
-        checkBx.setAttribute('type','checkbox');
+    const titleDisplay = document.createElement('div');
+    titleDisplay.textContent = this.title;
+    bookCard.appendChild(titleDisplay);
+  
+    const authorDisplay = document.createElement('div');
+    authorDisplay.textContent = this.author;
+    bookCard.appendChild(authorDisplay);
 
-        const checkBxLabel = document.createElement('label');
-        checkBxLabel.setAttribute('for','book-card');
-        checkBxLabel.textContent = 'Read?';
+    const imgPage = document.createElement('img');
+    imgPage.setAttribute('src','files.png');
+    imgPage.setAttribute('height','20');
+    bookCard.appendChild(imgPage);
 
+    const pageDisplay = document.createElement('div');
+    pageDisplay.textContent = this.page;
+    bookCard.appendChild(pageDisplay);
 
-        for (let bookKey in bookKeys) {
-            if (bookKeys[bookKey] == 'read' && arr[book][bookKeys[bookKey]] == true) {
-                checkBx.checked = true;
-                bookCard.appendChild(checkBxLabel);
-                bookCard.appendChild(checkBx);
-            } else if (bookKeys[bookKey] == 'read' && arr[book][bookKeys[bookKey]] == false) {
-                checkBx.checked = false;
-                 bookCard.appendChild(checkBxLabel);
-                bookCard.appendChild(checkBx);
-            } else if (typeof(arr[book][bookKeys[bookKey]]) != 'function' && bookKeys[bookKey] == 'page') {
-                const imgPage = document.createElement('img');
-                imgPage.setAttribute('src','files.png');
-                imgPage.setAttribute('height','20');
-                bookCard.appendChild(imgPage);
+    const checkBxLabel = document.createElement('label');
+    checkBxLabel.setAttribute('for','book-card');
+    checkBxLabel.textContent = 'Read?';
 
-                const valueDisplay = document.createElement('div');
-                valueDisplay.textContent = arr[book][bookKeys[bookKey]];
-                bookCard.appendChild(valueDisplay);
-            } else if (typeof(arr[book][bookKeys[bookKey]]) != 'function' && bookKeys[bookKey] != 'page') {
-                const valueDisplay = document.createElement('div');
-                valueDisplay.textContent = arr[book][bookKeys[bookKey]];
-                bookCard.appendChild(valueDisplay);
-            }
+    const checkBx = document.createElement('input');
+    checkBx.setAttribute('type','checkbox');
+
+    checkBx.checked = this.read;
+    bookCard.appendChild(checkBxLabel);
+    bookCard.appendChild(checkBx);
+
+    const rmvBtn = document.createElement('button');
+    rmvBtn.className = 'remove-button';
+    rmvBtn.appendChild(document.createTextNode("Remove"));
+    bookCard.appendChild(rmvBtn);
+
+    rmvBtn.addEventListener("click", () => {
+        const index = myLibrary.indexOf(this);
+
+        if(index != -1) {
+            myLibrary.splice(index,1);
+            bookContainer.removeChild(bookCard);
         }
-    
-        const rmvBtn = document.createElement('button');
-        rmvBtn.className = 'remove-button';
-        rmvBtn.value = book;
-        bookCard.appendChild(rmvBtn);
+    });
 
-        rmvBtn.appendChild(document.createTextNode("Remove"));
-
-        rmvBtn.addEventListener("click", () => {
-            arr.splice(book,1);
-            displayBook(arr);
-        });
-
-        checkBx.addEventListener("click", () => {
-            checkBx.checked ? arr[book]['readTrue']() : arr[book]['readFalse']();
-        });
-    }
+    checkBx.addEventListener("click", () => {
+        checkBx.checked ? this.read = true : this.read = false;
+    });
 }
 
 function addBookToLibrary(title,author,page,read) {
@@ -89,16 +81,16 @@ function addBookToLibrary(title,author,page,read) {
     }
 }
 
-addBookToLibrary('Pride and Prejudice', 'Jane Austen', 254, true);
-addBookToLibrary('Little Women', 'Louisa May Alcott', 759, false);
-displayBook(myLibrary);
-
 addBook.addEventListener('click', () => {
     mainDialog.showModal();
 })
 
 mainDialog.addEventListener("close", () => {
-    mainDialog.returnValue != 'cancel' ? displayBook(myLibrary) : null;
+    if(mainDialog.returnValue != 'cancel') {
+        for (book in myLibrary) {
+            myLibrary[book].displayBook();
+        }
+    }
 })
 
 submitBtn.addEventListener("click", (event) => {
@@ -122,3 +114,9 @@ cancelBtn.addEventListener("click", (event) => {
     form.reset();
 })
 
+addBookToLibrary('Pride and Prejudice', 'Jane Austen', 254, true);
+addBookToLibrary('Little Women', 'Louisa May Alcott', 759, false);
+
+for (book in myLibrary) {
+    myLibrary[book].displayBook();
+}
